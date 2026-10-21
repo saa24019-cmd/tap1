@@ -20,7 +20,6 @@
             touch-action: manipulation;
         }
 
-        /* カスタムアニメーションとボタン効果 */
         .click-target {
             transition: transform 0.05s ease, box-shadow 0.05s ease;
             box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.4), 0 8px 10px -6px rgba(16, 185, 129, 0.2);
@@ -57,7 +56,6 @@
             }
         }
 
-        /* スクロールバーのカスタマイズ */
         ::-webkit-scrollbar {
             width: 6px;
         }
@@ -75,7 +73,6 @@
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col justify-between antialiased selection:bg-emerald-500 selection:text-white">
 
-    <!-- ナビゲーションバー -->
     <header class="w-full bg-slate-800/80 backdrop-blur-md border-b border-slate-700/60 sticky top-0 z-40">
         <div class="max-w-4xl mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center space-x-3">
@@ -89,12 +86,10 @@
             </div>
 
             <div class="flex items-center space-x-2">
-                <!-- サウンドON/OFF切替 -->
                 <button id="soundToggleBtn" title="効果音 ON/OFF" class="bg-slate-700 hover:bg-slate-600 text-slate-200 p-2 rounded-xl transition text-xs flex items-center space-x-1 border border-slate-600">
                     <i id="soundIcon" class="fa-solid fa-volume-high text-emerald-400"></i>
                 </button>
 
-                <!-- ユーザー認証ステータス / ログイン領域 -->
                 <div id="authContainer" class="flex items-center space-x-2">
                     <button id="loginBtn" class="flex items-center space-x-2 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm px-4 py-2 rounded-xl transition duration-200 shadow-lg shadow-emerald-600/20 active:scale-95">
                         <i class="fa-brands fa-google"></i>
@@ -113,19 +108,17 @@
         </div>
     </header>
 
-    <!-- メインコンテンツ -->
     <main class="max-w-4xl w-full mx-auto px-4 py-6 flex-grow flex flex-col md:flex-row gap-6">
         
-        <!-- 左カラム: ゲームメインエリア -->
+        <!-- ゲームエリア -->
         <section class="flex-1 bg-slate-800/40 rounded-3xl p-6 border border-slate-700/50 flex flex-col justify-between items-center relative overflow-hidden backdrop-blur-sm min-h-[460px]">
             
-            <!-- アプリのストーリー・社会課題解決背景メッセージ -->
             <div class="w-full bg-emerald-950/40 border border-emerald-500/30 rounded-2xl p-3 mb-4 text-xs text-emerald-200 flex items-center space-x-2">
                 <i class="fa-solid fa-tractor text-emerald-400 text-lg flex-shrink-0"></i>
                 <span>農業の人手不足をテーマにした連打収穫ゲーム！作物を限界まで収穫して地域の農業を救おう！</span>
             </div>
 
-            <!-- モード選択 (5s / 10s / 30s) -->
+            <!-- モード選択 -->
             <div class="w-full flex items-center justify-center gap-2 mb-2">
                 <span class="text-xs font-bold text-slate-400 mr-1"><i class="fa-solid fa-clock mr-1"></i>制限時間:</span>
                 <button data-time="5" class="mode-btn bg-slate-700 text-slate-300 text-xs px-3 py-1.5 rounded-xl font-bold border border-slate-600 hover:bg-slate-600 transition">5秒</button>
@@ -133,13 +126,12 @@
                 <button data-time="30" class="mode-btn bg-slate-700 text-slate-300 text-xs px-3 py-1.5 rounded-xl font-bold border border-slate-600 hover:bg-slate-600 transition">30秒</button>
             </div>
 
-            <!-- スコア＆タイマー＆コンボ表示 -->
+            <!-- スコア表示 -->
             <div class="w-full flex justify-between items-center mb-2 z-10">
                 <div class="bg-slate-900/80 border border-slate-700/80 rounded-2xl px-4 py-2 text-center min-w-[90px]">
                     <span class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">TIME</span>
                     <span id="timerText" class="text-2xl font-black text-amber-400 font-mono">10.0s</span>
                 </div>
-                <!-- コンボカウンター -->
                 <div class="bg-slate-900/80 border border-slate-700/80 rounded-2xl px-3 py-2 text-center min-w-[80px]">
                     <span class="block text-[10px] font-bold text-amber-400 uppercase tracking-wider">COMBO</span>
                     <span id="comboText" class="text-2xl font-black text-amber-300 font-mono">0</span>
@@ -150,19 +142,16 @@
                 </div>
             </div>
 
-            <!-- クリックエリア / ボタン -->
+            <!-- クリックボタン -->
             <div class="my-auto relative flex items-center justify-center w-full py-4">
-                <!-- タップボタン -->
                 <button id="clickBtn" disabled class="click-target disabled:opacity-50 disabled:cursor-not-allowed w-44 h-44 sm:w-52 sm:h-52 rounded-full bg-gradient-to-br from-emerald-500 via-emerald-600 to-teal-700 text-white font-black text-2xl flex flex-col items-center justify-center shadow-2xl relative group border-4 border-emerald-400/30">
                     <i id="cropIcon" class="fa-solid fa-carrot text-5xl mb-2 group-hover:scale-110 transition-transform text-amber-300"></i>
                     <span id="clickBtnText" class="text-lg">START待機</span>
                 </button>
-                
-                <!-- クリックエフェクト表示コンテナ -->
                 <div id="effectContainer" class="absolute inset-0 pointer-events-none"></div>
             </div>
 
-            <!-- ゲーム制御ボタン群 -->
+            <!-- 操作ボタン -->
             <div class="w-full z-10 flex flex-col gap-2">
                 <button id="startBtn" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-base py-3.5 rounded-2xl transition duration-200 shadow-lg shadow-emerald-500/20 active:scale-[0.99]">
                     <i class="fa-solid fa-play mr-2"></i>収穫スタート！
@@ -173,10 +162,9 @@
             </div>
         </section>
 
-        <!-- 右カラム: マイ記録＆ランキング -->
         <section class="w-full md:w-80 flex flex-col gap-6">
             
-            <!-- 自己ベスト表示エリア -->
+            <!-- 自己記録 -->
             <div class="bg-slate-800/40 rounded-3xl p-5 border border-slate-700/50 flex flex-col gap-3">
                 <h2 class="text-sm font-bold text-slate-300 flex items-center justify-between">
                     <span><i class="fa-solid fa-trophy text-amber-400 mr-2"></i>あなたの農家記録</span>
@@ -200,7 +188,7 @@
                 </div>
             </div>
 
-            <!-- グローバルランキング -->
+            <!-- ランキング -->
             <div class="bg-slate-800/40 rounded-3xl p-5 border border-slate-700/50 flex flex-col flex-grow min-h-[300px]">
                 <div class="flex justify-between items-center mb-3">
                     <h2 class="text-sm font-bold text-slate-300 flex items-center">
@@ -209,7 +197,6 @@
                     <span id="rankingModeBadge" class="text-[10px] text-slate-300 bg-emerald-700/50 border border-emerald-500/30 px-2 py-0.5 rounded-full font-bold">10秒部門</span>
                 </div>
 
-                <!-- ランキングリスト -->
                 <div id="leaderboardList" class="flex flex-col gap-2 overflow-y-auto max-h-[320px] pr-1">
                     <div class="text-center py-8 text-slate-500 text-xs">
                         <i class="fa-solid fa-circle-notch fa-spin text-lg mb-2"></i>
@@ -221,7 +208,7 @@
         </section>
     </main>
 
-    <!-- フッター (プライバシーポリシー・著作権表示) -->
+    <!-- フッター -->
     <footer class="w-full border-t border-slate-800 bg-slate-950/60 py-4 px-4 text-center text-xs text-slate-500 flex flex-col sm:flex-row justify-between items-center max-w-4xl mx-auto gap-2">
         <p>© 2026 AgriDash App - Web Game & Cloud Scoreboard</p>
         <div class="flex items-center space-x-4 text-slate-400">
@@ -230,7 +217,7 @@
         </div>
     </footer>
 
-    <!-- 通知モーダル (アラート代替) -->
+    <!-- モーダルダイアログ -->
     <div id="modalOverlay" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-200">
         <div class="bg-slate-800 border border-slate-700 rounded-3xl p-6 max-w-sm w-full shadow-2xl transform scale-95 transition-transform duration-200" id="modalBox">
             <div class="flex items-center space-x-3 mb-4">
@@ -241,14 +228,13 @@
             </div>
             <div id="modalMessage" class="text-sm text-slate-300 mb-6 leading-relaxed max-h-[60vh] overflow-y-auto">メッセージ内容</div>
             <div class="flex justify-end gap-2" id="modalActions">
-                <button id="modalCloseBtn" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm py-2.5 rounded-xl transition">
+                <button id="modalCloseBtn" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm py-2 rounded-xl transition">
                     OK
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- Firebase SDK Modules -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { 
@@ -269,10 +255,7 @@
             serverTimestamp 
         } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // --- Firebase初期化 ---
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'tap1-df28f';
-        
-        // 指定されたFirebase設定情報
+        // Firebase初期設定
         const firebaseConfig = {
             apiKey: "AIzaSyD25UJDg-A1c-WgkQpWEKp2Q_ukjhqF7wo",
             authDomain: "tap1-df28f.firebaseapp.com",
@@ -287,7 +270,7 @@
         const db = getFirestore(app);
         const provider = new GoogleAuthProvider();
 
-        // --- 効果音システム (Web Audio API による自作SE) ---
+        // 効果音システム
         let audioCtx = null;
         let isSoundEnabled = true;
 
@@ -312,7 +295,6 @@
             const now = audioCtx.currentTime;
 
             if (type === 'tap') {
-                // 通常タップ音
                 osc.type = 'sine';
                 osc.frequency.setValueAtTime(400, now);
                 osc.frequency.exponentialRampToValueAtTime(800, now + 0.05);
@@ -321,7 +303,6 @@
                 osc.start(now);
                 osc.stop(now + 0.05);
             } else if (type === 'combo') {
-                // ボーナスタップ音
                 osc.type = 'triangle';
                 osc.frequency.setValueAtTime(600, now);
                 osc.frequency.exponentialRampToValueAtTime(1200, now + 0.08);
@@ -330,7 +311,6 @@
                 osc.start(now);
                 osc.stop(now + 0.08);
             } else if (type === 'golden') {
-                // 黄金作物タップ音
                 osc.type = 'square';
                 osc.frequency.setValueAtTime(800, now);
                 osc.frequency.setValueAtTime(1200, now + 0.05);
@@ -340,7 +320,6 @@
                 osc.start(now);
                 osc.stop(now + 0.15);
             } else if (type === 'finish') {
-                // タイムアップ音
                 osc.type = 'sawtooth';
                 osc.frequency.setValueAtTime(400, now);
                 osc.frequency.linearRampToValueAtTime(150, now + 0.3);
@@ -351,11 +330,10 @@
             }
         }
 
-        // --- ゲーム状態変数 ---
         let currentUser = null;
         let score = 0;
         let combo = 0;
-        let selectedTimeMode = 10; // デフォルト10秒モード
+        let selectedTimeMode = 10;
         let timeLeft = 10.0;
         let timerId = null;
         let isPlaying = false;
@@ -363,10 +341,12 @@
         let isGoldenCrop = false;
         let goldenTimeout = null;
 
-        // 農作物のアイコンリスト (ランダム変更用)
+        let myScoreUnsubscribe = null;
+        let leaderboardUnsubscribe = null;
+
         const CROP_ICONS = ['fa-carrot', 'fa-apple-whole', 'fa-lemon', 'fa-pepper-hot', 'fa-seedling'];
 
-        // UI要素
+        // DOM elements
         const loginBtn = document.getElementById('loginBtn');
         const logoutBtn = document.getElementById('logoutBtn');
         const userInfo = document.getElementById('userInfo');
@@ -397,17 +377,13 @@
         const privacyPolicyBtn = document.getElementById('privacyPolicyBtn');
         const creditsBtn = document.getElementById('creditsBtn');
 
-        // サウンド切り替え
         soundToggleBtn.addEventListener('click', () => {
             isSoundEnabled = !isSoundEnabled;
-            if (isSoundEnabled) {
-                soundIcon.className = 'fa-solid fa-volume-high text-emerald-400';
-            } else {
-                soundIcon.className = 'fa-solid fa-volume-xmark text-slate-500';
-            }
+            soundIcon.className = isSoundEnabled 
+                ? 'fa-solid fa-volume-high text-emerald-400' 
+                : 'fa-solid fa-volume-xmark text-slate-500';
         });
 
-        // モード選択
         modeBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 if (isPlaying) return;
@@ -428,7 +404,6 @@
             });
         });
 
-        // --- モーダル表示関数 ---
         function showModal(title, messageHtml, iconClass = "fa-solid fa-info-circle", onConfirm = null) {
             const overlay = document.getElementById('modalOverlay');
             const box = document.getElementById('modalBox');
@@ -471,45 +446,41 @@
             box.classList.add('scale-95');
         }
 
-        // --- プライバシー・規約モーダル ---
         privacyPolicyBtn.addEventListener('click', () => {
             showModal(
                 "個人情報保護方針・利用規約",
                 `<div class="space-y-3 text-xs">
                     <p class="font-bold text-slate-200">1. 個人情報の取り扱いについて</p>
-                    <p>当アプリはGoogleログイン認証を使用しますが、ユーザーの氏名・電話番号・住所などの個人情報は一切収集・保持しません。保存されるのはゲームのハイスコアおよび表示用のニックネーム・アイコン画像URLのみです。</p>
+                    <p>当アプリはGoogleログイン認証を使用しますが、個人情報は一切収集・保持しません。保存されるのはゲームのハイスコアおよび表示用のニックネーム・アイコン画像URLのみです。</p>
                     <p class="font-bold text-slate-200">2. データの管理とセキュリティ</p>
-                    <p>データはクラウドデータベース（Firestore）へ安全に送信・保存されます。ログインしたユーザーはいつでも自身のハイスコア記録を削除可能です。</p>
+                    <p>データはクラウドデータベース（Firestore）へ安全に送信・保存されます。</p>
                 </div>`,
                 "fa-solid fa-shield-halved text-emerald-400"
             );
         });
 
-        // --- ライセンス・クレジットモーダル ---
         creditsBtn.addEventListener('click', () => {
             showModal(
                 "使用素材・ライセンス",
                 `<div class="space-y-2 text-xs">
-                    <p>当アプリで使用しているライブラリ・アイコン素材のクレジット表記です。</p>
                     <ul class="list-disc pl-4 space-y-1">
-                        <li>FontAwesome Free (アイコン表示)</li>
-                        <li>Tailwind CSS (UIスタイリング)</li>
-                        <li>canvas-confetti (スコア更新エフェクト)</li>
-                        <li>Web Audio API (効果音の自作発音合成)</li>
+                        <li>FontAwesome Free (アイコン)</li>
+                        <li>Tailwind CSS (UIデザイン)</li>
+                        <li>canvas-confetti (演出)</li>
+                        <li>Web Audio API (効果音合成)</li>
                     </ul>
                 </div>`,
                 "fa-solid fa-copyright text-emerald-400"
             );
         });
 
-        // --- 認証機能 ---
         async function initAuth() {
             try {
                 if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
                     await signInWithCustomToken(auth, __initial_auth_token);
                 }
             } catch (err) {
-                console.warn("Custom token auth failed:", err);
+                console.warn("Custom token auth skipped or failed:", err);
             }
         }
 
@@ -545,24 +516,13 @@
                 if (error.code === 'auth/unauthorized-domain') {
                     const currentDomain = window.location.hostname;
                     showModal(
-                        "ドメイン承認が必要です (unauthorized-domain)", 
+                        "ドメイン承認が必要です", 
                         `<div class="space-y-3 text-xs text-slate-300">
                             <p class="font-bold text-amber-300 text-sm">現在のドメイン: <code class="bg-slate-900 px-2 py-1 rounded text-white border border-amber-500/40 select-all">${currentDomain}</code></p>
-                            <p>Firebase Authenticationのセキュリティ保護のため、現在アクセスしているドメインをFirebase Consoleに登録する必要があります。</p>
-                            <hr class="border-slate-700 my-2">
-                            <p class="font-bold text-slate-200">【設定手順】</p>
-                            <ol class="list-decimal pl-4 space-y-1">
-                                <li><a href="https://console.firebase.google.com/" target="_blank" class="text-emerald-400 underline">Firebase Console</a> を開く</li>
-                                <li>プロジェクト <strong>tap1-df28f</strong> を選択</li>
-                                <li><strong>Authentication</strong> ＞ <strong>設定</strong> ＞ <strong>承認済みドメイン</strong> を開く</li>
-                                <li>「ドメインの追加」をクリックし、上記の <code class="text-emerald-300">${currentDomain}</code> を追加する</li>
-                            </ol>
-                            <p class="text-[11px] text-slate-400 mt-2">※GitHub Pagesに公開した後は、<code class="text-slate-300">ユーザー名.github.io</code> も同様に追加してください。</p>
+                            <p>Firebase Authenticationの承認済みドメインに上記ドメインを追加してください。</p>
                         </div>`, 
                         "fa-solid fa-shield-cat text-amber-400"
                     );
-                } else if (error.code === 'auth/popup-blocked') {
-                    showModal("ログインエラー", "ポップアップがブロックされました。ブラウザのポップアップブロックを解除して再試行してください。", "fa-solid fa-triangle-exclamation text-amber-400");
                 } else {
                     showModal("ログインエラー", `Googleログインに失敗しました。<br><span class="text-xs text-slate-400 font-mono">${error.message || error.code}</span>`, "fa-solid fa-triangle-exclamation text-rose-400");
                 }
@@ -575,20 +535,19 @@
             });
         });
 
-        // --- Firestore データ操作 ---
-
-        // RULE 1 準拠: /artifacts/{appId}/public/data/{collectionName}
-        function getPublicCollectionRef() {
-            return collection(db, 'artifacts', appId, 'public', 'data', `click_game_scores_${selectedTimeMode}s`);
+        function getScoreCollectionRef() {
+            return collection(db, `click_game_scores_${selectedTimeMode}s`);
         }
 
         function getScoreDocRef(uid) {
-            return doc(db, 'artifacts', appId, 'public', 'data', `click_game_scores_${selectedTimeMode}s`, uid);
+            return doc(db, `click_game_scores_${selectedTimeMode}s`, uid);
         }
 
         function listenToMyScore(uid) {
+            if (myScoreUnsubscribe) myScoreUnsubscribe();
+
             const scoreDoc = getScoreDocRef(uid);
-            onSnapshot(scoreDoc, (snapshot) => {
+            myScoreUnsubscribe = onSnapshot(scoreDoc, (snapshot) => {
                 if (snapshot.exists()) {
                     const data = snapshot.data();
                     myBestScoreValue = data.score || 0;
@@ -607,24 +566,43 @@
                 }
             }, (error) => {
                 console.error("Error loading user score:", error);
+                if (error.code === 'permission-denied') {
+                    showPermissionErrorNotice();
+                }
             });
         }
 
         function listenToLeaderboard() {
-            const publicCol = getPublicCollectionRef();
-            onSnapshot(publicCol, (snapshot) => {
+            if (leaderboardUnsubscribe) leaderboardUnsubscribe();
+
+            const scoreCol = getScoreCollectionRef();
+            leaderboardUnsubscribe = onSnapshot(scoreCol, (snapshot) => {
                 const list = [];
                 snapshot.forEach(doc => {
                     list.push({ id: doc.id, ...doc.data() });
                 });
 
                 list.sort((a, b) => (b.score || 0) - (a.score || 0));
-
                 renderLeaderboard(list.slice(0, 10));
             }, (error) => {
                 console.error("Error loading leaderboard:", error);
-                leaderboardList.innerHTML = `<p class="text-xs text-rose-400 text-center py-4">ランキングの読み込みに失敗しました</p>`;
+                if (error.code === 'permission-denied') {
+                    showPermissionErrorNotice();
+                } else {
+                    leaderboardList.innerHTML = `<p class="text-xs text-rose-400 text-center py-4">ランキングの読み込みに失敗しました</p>`;
+                }
             });
+        }
+
+        function showPermissionErrorNotice() {
+            leaderboardList.innerHTML = `
+                <div class="p-3 bg-rose-950/40 border border-rose-500/30 rounded-xl text-center space-y-2">
+                    <p class="text-xs font-bold text-rose-300"><i class="fa-solid fa-lock mr-1"></i>Firestore 権限エラー</p>
+                    <p class="text-[11px] text-slate-300 leading-normal">
+                        Firebase Console でセキュリティルールを更新してください。
+                    </p>
+                </div>
+            `;
         }
 
         function renderLeaderboard(topScores) {
@@ -686,7 +664,7 @@
                     showModal("🎉 大収穫！ハイスコア更新！", `おめでとうございます！新記録 [ ${finalScore} pt ] を出荷・記録しました！`, "fa-solid fa-wheat-awn text-amber-400");
                 } catch (err) {
                     console.error("Score save error:", err);
-                    showModal("保存失敗", "スコアの保存中にエラーが発生しました。", "fa-solid fa-triangle-exclamation");
+                    showModal("保存失敗", "スコアの保存中にエラーが発生しました。<br>Firestoreのルールを確認してください。", "fa-solid fa-triangle-exclamation text-rose-400");
                 }
             } else {
                 showModal("収穫終了！", `今回の収穫スコア: ${finalScore} pt\n(自己ベスト: ${myBestScoreValue} pt)`, "fa-solid fa-flag-checkered");
@@ -712,8 +690,6 @@
             );
         });
 
-        // --- ゲームロジック ---
-
         function triggerGoldenCrop() {
             if (!isPlaying || isGoldenCrop) return;
 
@@ -722,7 +698,6 @@
             cropIcon.className = 'fa-solid fa-star text-5xl mb-2 text-amber-300 animate-spin';
             clickBtnText.textContent = '黄金作物!!';
 
-            // 1.8秒間のみ出現
             goldenTimeout = setTimeout(() => {
                 resetGoldenCrop();
             }, 1800);
@@ -756,7 +731,6 @@
             const startTime = Date.now();
             const duration = selectedTimeMode * 1000;
 
-            // ランダムで黄金作物を発生させるタイマー
             scheduleNextGolden();
 
             timerId = setInterval(() => {
@@ -773,7 +747,7 @@
 
         function scheduleNextGolden() {
             if (!isPlaying) return;
-            const randomDelay = Math.random() * 3000 + 2000; // 2〜5秒間隔
+            const randomDelay = Math.random() * 3000 + 2000;
             setTimeout(() => {
                 if (isPlaying) {
                     triggerGoldenCrop();
@@ -805,14 +779,12 @@
             let addedPoints = 1;
             let soundType = 'tap';
 
-            // 黄金作物の場合は大量加点
             if (isGoldenCrop) {
                 addedPoints = 10;
                 soundType = 'golden';
                 resetGoldenCrop();
                 clearTimeout(goldenTimeout);
             } else if (combo % 5 === 0) {
-                // 5コンボごとにボーナス加点
                 addedPoints = 3;
                 soundType = 'combo';
             }
